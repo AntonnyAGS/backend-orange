@@ -9,10 +9,13 @@ package br.com.orange.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -26,7 +29,11 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
 	private String nome;
+	
+	@Email(message="Insira um email válido.")
+	@Column(unique = true)
 	private String email;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")

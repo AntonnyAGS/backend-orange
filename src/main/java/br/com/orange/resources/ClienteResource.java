@@ -2,6 +2,9 @@ package br.com.orange.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +33,14 @@ public class ClienteResource {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Cliente>> findAll(){
+	public ResponseEntity<List<ClienteDTO>> findAll(){
 		List<Cliente> lista = service.findAll();
-		return ResponseEntity.ok(lista);
+		List<ClienteDTO> listaDto = lista.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok(listaDto);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Cliente obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody Cliente obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();	
@@ -45,7 +49,6 @@ public class ClienteResource {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody ClienteDTO objDto, @PathVariable Integer id){
-		
 		Cliente obj = service.fromDTO(objDto);
 		obj.setId(id);
 		System.out.print(obj.getNome());
