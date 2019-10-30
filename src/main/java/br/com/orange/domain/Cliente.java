@@ -14,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.orange.domain.enums.TipoCliente;
 
 @Entity
@@ -26,6 +28,8 @@ public class Cliente implements Serializable{
 	
 	private String nome;
 	private String email;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date dtNascimento;
 	private String cidade;
 	private String telefone;
