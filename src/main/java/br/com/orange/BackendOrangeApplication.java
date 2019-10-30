@@ -29,8 +29,10 @@ public class BackendOrangeApplication implements CommandLineRunner {
 		
 		Cliente c1 = new Cliente(null, "Antonny", "antonny@gmail.com", sdf.parse("18/02/2000"), "Guarulhos", "11959414462", "43697600893", 
 				TipoCliente.PESSOAFISICA);
+		Cliente c2 = new Cliente(null, "Studio", "studio@gmail.com", null, "Guarulhos", "11959414462", "4569426", 
+				TipoCliente.PESSOAJURIDICA);
 		
-		clienteRepository.saveAll(Arrays.asList(c1));
+		clienteRepository.saveAll(Arrays.asList(c1, c2));
 		/* ----------------- */
 		
 	}

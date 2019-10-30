@@ -34,7 +34,7 @@ public class Cliente implements Serializable{
 	private String cidade;
 	private String telefone;
 	private String cpfOuCnpj;
-	private int tipoCliente;
+	private Integer tipoCliente;
 	
 	//CONSTRUCTOR'S
 	public Cliente() {}
@@ -48,7 +48,7 @@ public class Cliente implements Serializable{
 		this.cidade = cidade;
 		this.telefone = telefone;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipoCliente = tipoCliente.getCod();
+		this.tipoCliente = (tipoCliente == null) ? null :  tipoCliente.getCod();
 	}
 
 	//GETTER'S AND SETTER'S
