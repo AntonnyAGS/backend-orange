@@ -24,17 +24,19 @@ public class Produto implements Serializable {
 	private String nome;
 	private String descricao;
 	private Date date;
+	private Double preco;
 
 	// CONSTRUTORES
 	public Produto() {
 	}
 
-	public Produto(Integer id, String nome, String descricao, Date date) {
+	public Produto(Integer id, String nome, String descricao, Date date, Double preco) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.date = date;
+		this.preco = preco;
 	}
 
 	public Integer getId() {
@@ -67,6 +69,14 @@ public class Produto implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
 
 	// HASHCODE E EQUALS
