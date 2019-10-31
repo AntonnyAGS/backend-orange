@@ -2,15 +2,31 @@ package br.com.orange.domain.dto;
 
 import java.io.Serializable;
 
-import br.com.orange.domain.Cliente;
+import javax.persistence.Column;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
+import br.com.orange.domain.Cliente;
+import br.com.orange.services.validation.ClienteUpdate;
+
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
+	
+	@Column(unique = true)
+	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
+	@Email(message="Digite um email válido")
 	private String email;
+	
+	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
 	private String nome;
+	
+	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
 	private String cidade;
+	
+	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
 	private String telefone;
 	
 	//CONSTRUCTOR
