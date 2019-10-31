@@ -1,3 +1,9 @@
+/** 
+ * Author: Antonny
+ * Project: Orange
+ * Date: 29/10
+ */
+
 package br.com.orange.resources;
 
 import java.net.URI;

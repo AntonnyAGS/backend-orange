@@ -9,7 +9,6 @@ package br.com.orange.domain.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -29,7 +28,6 @@ public class ClienteNewDTO implements Serializable{
 	private String nome;
 	
 	@Email(message="Insira um email válido.")
-	@Column(unique = true)
 	private String email;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")

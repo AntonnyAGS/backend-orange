@@ -9,6 +9,7 @@ package br.com.orange.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,8 @@ public class Cliente implements Serializable{
 	private Integer id;
 	
 	private String nome;
-
+	
+	@Column(unique=true)
 	private String email;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")

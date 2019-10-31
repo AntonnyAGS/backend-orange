@@ -1,8 +1,13 @@
+/** 
+ * Author: Antonny
+ * Project: Orange
+ * Date: 29/10
+ */
+
 package br.com.orange.domain.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -15,7 +20,6 @@ public class ClienteDTO implements Serializable {
 	
 	private Integer id;
 	
-	@Column(unique = true)
 	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
 	@Email(message="Digite um email válido")
 	private String email;
