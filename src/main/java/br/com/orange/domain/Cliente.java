@@ -7,24 +7,42 @@
 package br.com.orange.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import br.com.orange.domain.enums.TipoCliente;
+
+
+@Entity
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
+
 	private String email;
-	private String dtNascimento;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date dtNascimento;
 	private String cidade;
 	private String telefone;
 	private String cpfOuCnpj;
-	private int tipoCliente;
+	private Integer tipoCliente;
 	
 	//CONSTRUCTOR'S
 	public Cliente() {}
 	
-	public Cliente(Integer id, String nome, String email, String dtNascimento, String cidade, String telefone,
-			String cpfOuCnpj, int tipoCliente) {
+	public Cliente(Integer id, String nome, String email, Date dtNascimento, String cidade, String telefone,
+			String cpfOuCnpj, TipoCliente tipoCliente) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -32,7 +50,7 @@ public class Cliente implements Serializable{
 		this.cidade = cidade;
 		this.telefone = telefone;
 		this.cpfOuCnpj = cpfOuCnpj;
-		this.tipoCliente = tipoCliente;
+		this.tipoCliente = (tipoCliente == null) ? null :  tipoCliente.getCod();
 	}
 
 	//GETTER'S AND SETTER'S
@@ -60,11 +78,11 @@ public class Cliente implements Serializable{
 		this.email = email;
 	}
 
-	public String getDtNascimento() {
+	public Date getDtNascimento() {
 		return dtNascimento;
 	}
 
-	public void setDtNascimento(String dtNascimento) {
+	public void setDtNascimento(Date dtNascimento) {
 		this.dtNascimento = dtNascimento;
 	}
 
@@ -92,12 +110,12 @@ public class Cliente implements Serializable{
 		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
-	public int getTipoCliente() {
-		return tipoCliente;
+	public TipoCliente getTipoCliente() {
+		return TipoCliente.toEnum(tipoCliente);
 	}
 
-	public void setTipoCliente(int tipoCliente) {
-		this.tipoCliente = tipoCliente;
+	public void setTipoCliente(TipoCliente tipoCliente) {
+		this.tipoCliente = tipoCliente.getCod();
 	}
 
 	//HASH CODE AND EQUALS
