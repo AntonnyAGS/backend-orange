@@ -18,6 +18,7 @@ public class BackendOrangeApplication implements CommandLineRunner {
 	@Autowired
 	ClienteRepository clienteRepository;
 	
+
 	public static void main(String[] args) {
 		SpringApplication.run(BackendOrangeApplication.class, args);
 	}
@@ -34,6 +35,7 @@ public class BackendOrangeApplication implements CommandLineRunner {
 		
 		clienteRepository.saveAll(Arrays.asList(c1, c2));
 		/* ----------------- */
+		
 		
 	}
 }
