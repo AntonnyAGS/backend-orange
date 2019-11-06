@@ -13,6 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Produto implements Serializable {
@@ -23,20 +27,27 @@ public class Produto implements Serializable {
 	private Integer id;
 	private String nome;
 	private String descricao;
-	private Date date;
 	private Double preco;
+
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date data;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 
 	// CONSTRUTORES
 	public Produto() {
 	}
 
-	public Produto(Integer id, String nome, String descricao, Date date, Double preco) {
+	public Produto(Integer id, String nome, String descricao, Date data, Double preco, Cliente cliente) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.date = date;
+		this.data = data;
 		this.preco = preco;
+		this.cliente = cliente;
 	}
 
 	public Integer getId() {
@@ -63,12 +74,12 @@ public class Produto implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getData() {
+		return data;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	public Double getPreco() {
@@ -77,6 +88,14 @@ public class Produto implements Serializable {
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	// HASHCODE E EQUALS
