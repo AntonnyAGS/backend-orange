@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.orange.domain.Cliente;
 import br.com.orange.domain.Produto;
+import br.com.orange.domain.dto.ProdutoDTO;
 import br.com.orange.domain.dto.ProdutoNewDTO;
 import br.com.orange.repositories.ProdutoRepository;
 import br.com.orange.services.exceptions.ObjectNotFoundException;
@@ -65,12 +66,14 @@ public class ProdutoService {
 		cliente.setId(objDTO.getCliente_id());
 		return new Produto(null, objDTO.getNome(), objDTO.getDescricao(), objDTO.getData(), objDTO.getPreco(), cliente);
 	}
+	public Produto fromDTO(ProdutoDTO objDTO) {
+		return new Produto(null, objDTO.getNome(), objDTO.getDescricao(), null, objDTO.getPreco(), null);
+	}
 	
 	private void updateData(Produto newObj, Produto obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setDescricao(obj.getDescricao());
 		newObj.setPreco(obj.getPreco());
-		newObj.setData(obj.getData());
 	}
 	
 	

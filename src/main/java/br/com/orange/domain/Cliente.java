@@ -7,20 +7,29 @@
 package br.com.orange.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import br.com.orange.domain.enums.TipoCliente;
 
 
 @Entity
+
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -39,6 +48,9 @@ public class Cliente implements Serializable{
 	private String telefone;
 	private String cpfOuCnpj;
 	private Integer tipoCliente;
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Produto> produtos = new ArrayList<>();
 	
 	//CONSTRUCTOR'S
 	public Cliente() {}
@@ -120,6 +132,14 @@ public class Cliente implements Serializable{
 		this.tipoCliente = tipoCliente.getCod();
 	}
 
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
 	//HASH CODE AND EQUALS
 	@Override
 	public int hashCode() {
@@ -145,4 +165,5 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
+
 }

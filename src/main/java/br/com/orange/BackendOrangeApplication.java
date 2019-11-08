@@ -9,8 +9,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.orange.domain.Cliente;
+import br.com.orange.domain.Produto;
 import br.com.orange.domain.enums.TipoCliente;
 import br.com.orange.repositories.ClienteRepository;
+import br.com.orange.repositories.ProdutoRepository;
 
 @SpringBootApplication
 public class BackendOrangeApplication implements CommandLineRunner {
@@ -18,6 +20,8 @@ public class BackendOrangeApplication implements CommandLineRunner {
 	@Autowired
 	ClienteRepository clienteRepository;
 	
+	@Autowired
+	ProdutoRepository produtoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendOrangeApplication.class, args);
@@ -35,6 +39,13 @@ public class BackendOrangeApplication implements CommandLineRunner {
 		
 		clienteRepository.saveAll(Arrays.asList(c1, c2));
 		/* ----------------- */
+		/* PRODUTO TESTE */
+		Produto p1 = new Produto(null, "Laranja", "Laranja Criadas", sdf.parse("08/11/2019"), 200.80, c1);
+		c1.getProdutos().add(p1);
+		
+		produtoRepository.saveAll(Arrays.asList(p1));
+		
+		
 		
 		
 	}

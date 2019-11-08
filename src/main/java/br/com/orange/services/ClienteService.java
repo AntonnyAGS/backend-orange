@@ -18,8 +18,8 @@ import br.com.orange.domain.dto.ClienteDTO;
 import br.com.orange.domain.dto.ClienteNewDTO;
 import br.com.orange.domain.enums.TipoCliente;
 import br.com.orange.repositories.ClienteRepository;
+import br.com.orange.services.exceptions.DataIntegrityException;
 import br.com.orange.services.exceptions.ObjectNotFoundException;
-
 
 @Service
 public class ClienteService {
@@ -58,7 +58,7 @@ public class ClienteService {
 			repository.deleteById(id);
 		}
 		catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityViolationException("Não foi possível excluir");	
+			throw new DataIntegrityException("Não foi posível excluir este Cliente, pois ele possui produtos associados.");
 		}
 	}
 	
