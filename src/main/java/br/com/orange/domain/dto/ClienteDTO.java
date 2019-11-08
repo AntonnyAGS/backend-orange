@@ -27,10 +27,10 @@ public class ClienteDTO implements Serializable {
 	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
 	private String nome;
 	
-	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
+	@NotEmpty(message="A cidade deve ter entre 4 e 20 caracteres.")
 	private String cidade;
 	
-	@NotEmpty(message="O nome deve ter entre 4 e 20 caracteres.")
+	@NotEmpty(message="O telefone deve ter entre 4 e 20 caracteres.")
 	private String telefone;
 	
 	//CONSTRUCTOR

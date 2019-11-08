@@ -7,6 +7,7 @@ package br.com.orange.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.orange.domain.Produto;
+import br.com.orange.domain.dto.ProdutoDTO;
 import br.com.orange.domain.dto.ProdutoNewDTO;
 import br.com.orange.services.ProdutoService;
 
@@ -32,9 +34,10 @@ public class ProdutoResource {
 	ProdutoService service;
 
 	@GetMapping
-	public ResponseEntity<List<Produto>> findAll() {
+	public ResponseEntity<List<ProdutoDTO>> findAll() {
 		List<Produto> list = service.findAll();
-		return ResponseEntity.ok().body(list);
+		List<ProdutoDTO> listDto = list.stream().map(obj -> new ProdutoDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 
 	@GetMapping(value = "/{id}")
@@ -52,9 +55,10 @@ public class ProdutoResource {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody Produto produto, @PathVariable Integer id) {
-		produto.setId(id);
-		service.update(produto);
+	public ResponseEntity<Void> update(@Valid @RequestBody ProdutoDTO objDto, @PathVariable Integer id) {
+		Produto obj = service.fromDTO(objDto);
+		obj.setId(id);
+		service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
 

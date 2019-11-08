@@ -1,14 +1,13 @@
 package br.com.orange.domain.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import br.com.orange.domain.Produto;
 
-public class ProdutoNewDTO implements Serializable{
+public class ProdutoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -19,15 +18,18 @@ public class ProdutoNewDTO implements Serializable{
 	@NotEmpty(message = "O campo não pode ser vazio")
 	private String descricao;
 	
-	@NotNull
+	@NotNull(message = "O campo não pode ser vazio")
 	private Double preco;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date data;
-	private Integer cliente_id;
-	
 	//CONSTRUCTOR'S
-	public ProdutoNewDTO() {
+	public ProdutoDTO() {
+	}
+	
+	public ProdutoDTO(Produto obj) {
+		this.id = obj.getId();
+		this.nome = obj.getNome();
+		this.descricao = obj.getDescricao();
+		this.preco = obj.getPreco();
 	}
 	
 	//GET'S AND SETTER'S
@@ -61,22 +63,6 @@ public class ProdutoNewDTO implements Serializable{
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-	public Integer getCliente_id() {
-		return cliente_id;
-	}
-
-	public void setCliente_id(Integer cliente_id) {
-		this.cliente_id = cliente_id;
 	}
 
 }
