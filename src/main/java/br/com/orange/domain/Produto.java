@@ -17,14 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 
-@JsonIdentityInfo(
-  generator = ObjectIdGenerators.PropertyGenerator.class, 
-  property = "id")
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -42,11 +37,14 @@ public class Produto implements Serializable {
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
+	@ManyToOne
+	@JoinColumn(name= "categoria_id")
+	private Categoria categoria;
 	// CONSTRUTORES
 	public Produto() {
 	}
 
-	public Produto(Integer id, String nome, String descricao, Date data, Double preco, Cliente cliente) {
+	public Produto(Integer id, String nome, String descricao, Date data, Double preco, Cliente cliente, Categoria categoria) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -54,6 +52,7 @@ public class Produto implements Serializable {
 		this.data = data;
 		this.preco = preco;
 		this.cliente = cliente;
+		this.categoria = categoria;
 	}
 
 	public Integer getId() {
@@ -102,6 +101,13 @@ public class Produto implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	// HASHCODE E EQUALS

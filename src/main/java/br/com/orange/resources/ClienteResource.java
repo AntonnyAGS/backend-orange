@@ -31,7 +31,7 @@ import br.com.orange.services.ClienteService;
 public class ClienteResource {
 
 	@Autowired
-	ClienteService service;
+	private ClienteService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable Integer id){

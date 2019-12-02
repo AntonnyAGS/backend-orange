@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import br.com.orange.domain.Categoria;
 import br.com.orange.domain.Cliente;
 import br.com.orange.domain.Produto;
 import br.com.orange.domain.dto.ProdutoDTO;
@@ -64,10 +65,18 @@ public class ProdutoService {
 	public Produto fromDTO(ProdutoNewDTO objDTO) {
 		Cliente cliente = new Cliente();
 		cliente.setId(objDTO.getCliente_id());
-		return new Produto(null, objDTO.getNome(), objDTO.getDescricao(), objDTO.getData(), objDTO.getPreco(), cliente);
+		Categoria cat = new Categoria();
+		cat.setId(objDTO.getCategoria_id());
+		
+		return new Produto(null, objDTO.getNome(), objDTO.getDescricao(), objDTO.getData(), objDTO.getPreco(), cliente, cat);
 	}
 	public Produto fromDTO(ProdutoDTO objDTO) {
-		return new Produto(null, objDTO.getNome(), objDTO.getDescricao(), null, objDTO.getPreco(), null);
+		Cliente cliente = new Cliente();
+		cliente.setId(objDTO.getCliente_id());
+		Categoria cat = new Categoria();
+		cat.setId(objDTO.getCategoria_id());
+		
+		return new Produto(null, objDTO.getNome(), objDTO.getDescricao(), null, objDTO.getPreco(), cliente, cat);
 	}
 	
 	private void updateData(Produto newObj, Produto obj) {

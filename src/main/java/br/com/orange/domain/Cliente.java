@@ -19,17 +19,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.orange.domain.enums.TipoCliente;
 
 
 @Entity
 
-@JsonIdentityInfo(
-		  generator = ObjectIdGenerators.PropertyGenerator.class, 
-		  property = "id")
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -49,6 +45,7 @@ public class Cliente implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipoCliente;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
 	private List<Produto> produtos = new ArrayList<>();
 	

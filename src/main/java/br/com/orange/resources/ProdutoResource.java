@@ -31,7 +31,7 @@ import br.com.orange.services.ProdutoService;
 public class ProdutoResource {
 
 	@Autowired
-	ProdutoService service;
+	private ProdutoService service;
 
 	@GetMapping
 	public ResponseEntity<List<ProdutoDTO>> findAll() {

@@ -20,6 +20,13 @@ public class ProdutoDTO implements Serializable{
 	
 	@NotNull(message = "O campo não pode ser vazio")
 	private Double preco;
+	 
+	
+	private Integer cliente_id;
+	
+	private Integer categoria_id;
+
+	
 	
 	//CONSTRUCTOR'S
 	public ProdutoDTO() {
@@ -30,6 +37,8 @@ public class ProdutoDTO implements Serializable{
 		this.nome = obj.getNome();
 		this.descricao = obj.getDescricao();
 		this.preco = obj.getPreco();
+		this.cliente_id = obj.getCliente().getId();
+		this.setCategoria_id(obj.getCategoria().getId());
 	}
 	
 	//GET'S AND SETTER'S
@@ -65,4 +74,21 @@ public class ProdutoDTO implements Serializable{
 		this.preco = preco;
 	}
 
+	public Integer getCliente_id() {
+		return cliente_id;
+	}
+
+	public void setCliente_id(Integer cliente_id) {
+		this.cliente_id = cliente_id;
+	}
+
+	public Integer getCategoria_id() {
+		return categoria_id;
+	}
+
+	public void setCategoria_id(Integer categoria_id) {
+		this.categoria_id = categoria_id;
+	}
+	
+	
 }
